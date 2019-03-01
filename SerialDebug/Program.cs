@@ -1,5 +1,6 @@
 ﻿using led_strip_gui;
 using System;
+using System.Text;
 using System.Threading;
 
 namespace SerialDebug
@@ -17,10 +18,12 @@ namespace SerialDebug
 
         private static void onData(byte[] data)
         {
-            foreach (var item in data)
-            {
-                Console.WriteLine(item);
-            }
+            var text = Encoding.ASCII.GetString(data);
+            Console.WriteLine(text);
+            //foreach (var item in data)
+            //{
+            //    Console.WriteLine(item);
+            //}
             Console.WriteLine();
 
             //int b;
