@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "led-strip-gui", "led-strip-gui\led-strip-gui.csproj", "{EA97BC2A-178F-497D-86B9-A0A8D6740E65}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerialDebug", "SerialDebug\SerialDebug.csproj", "{38C36299-D264-49DD-86F3-64587F102FCD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{EA97BC2A-178F-497D-86B9-A0A8D6740E65}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA97BC2A-178F-497D-86B9-A0A8D6740E65}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA97BC2A-178F-497D-86B9-A0A8D6740E65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38C36299-D264-49DD-86F3-64587F102FCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38C36299-D264-49DD-86F3-64587F102FCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38C36299-D264-49DD-86F3-64587F102FCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38C36299-D264-49DD-86F3-64587F102FCD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
