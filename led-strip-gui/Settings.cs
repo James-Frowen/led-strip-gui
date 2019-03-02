@@ -4,7 +4,16 @@ namespace led_strip_gui
 {
     public class Settings
     {
-        private int brightness = 4;
+        public const int MIN_BRIGHTNESS = 0;
+        public const int MAX_BRIGHTNESS = 255;
+        public const int MIN_UPDATES_PER_SECOND = 0;
+        public const int MAX_UPDATES_PER_SECOND = 200;
+        public const int MIN_PALETTE_CHANGE_DIVIDER = 500;
+        public const int MAX_PALETTE_CHANGE_DIVIDER = 30000;
+
+        private int _brightness = 4;
+        private int _updatesPerSecond = 10;
+        private int _paletteChangeDivider = 1000;
         public Color color = Color.White;
         public ArduinoCodes.Mode mode = ArduinoCodes.Mode.Manual;
         public ArduinoCodes.Palette palette = ArduinoCodes.Palette.RainbowColors;
@@ -13,14 +22,44 @@ namespace led_strip_gui
         {
             get
             {
-                return this.brightness;
+                return this._brightness;
             }
 
             set
             {
-                if (value < 0) { this.brightness = 0; }
-                else if (value > 255) { this.brightness = 255; }
-                else { this.brightness = value; }
+                if (value > MAX_BRIGHTNESS) { this._brightness = MAX_BRIGHTNESS; }
+                else if (value < MIN_BRIGHTNESS) { this._brightness = MIN_BRIGHTNESS; }
+                else { this._brightness = value; }
+            }
+        }
+
+        public int UpdatesPerSecond
+        {
+            get
+            {
+                return this._updatesPerSecond;
+            }
+
+            set
+            {
+                if (value > MAX_UPDATES_PER_SECOND) { this._updatesPerSecond = MAX_UPDATES_PER_SECOND; }
+                else if (value < MIN_UPDATES_PER_SECOND) { this._updatesPerSecond = MIN_UPDATES_PER_SECOND; }
+                else { this._updatesPerSecond = value; }
+            }
+        }
+
+        public int PaletteChangeDivider
+        {
+            get
+            {
+                return this._paletteChangeDivider;
+            }
+
+            set
+            {
+                if (value > MAX_PALETTE_CHANGE_DIVIDER) { this._paletteChangeDivider = MAX_PALETTE_CHANGE_DIVIDER; }
+                else if (value < MIN_PALETTE_CHANGE_DIVIDER) { this._paletteChangeDivider = MIN_PALETTE_CHANGE_DIVIDER; }
+                else { this._paletteChangeDivider = value; }
             }
         }
     }

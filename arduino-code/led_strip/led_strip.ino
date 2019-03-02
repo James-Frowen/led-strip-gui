@@ -4,13 +4,23 @@
 #define NUM_LEDS 60
 #define LED_TYPE WS2811
 #define COLOR_ORDER GRB
-#define UPDATES_PER_SECOND 10
+
+// min/max settings
+#define MIN_BRIGHTNESS 0
+#define MAX_BRIGHTNESS 255
+#define MIN_UPDATES_PER_SECOND 0
+#define MAX_UPDATES_PER_SECOND 200
+#define MIN_PALETTE_CHANGE_DIVIDER 500
+// 1000 seconds * 60 = 1 min
+#define MAX_PALETTE_CHANGE_DIVIDER 30000 // int is 16 bit, so max value is
 
 // serial codes
-#define S_BRIGHTNESS 98 //b
-#define S_COLOR 99      //c
-#define S_MODE 109      //m
-#define S_PALETTE 112   //p
+#define S_BRIGHTNESS 98              //b
+#define S_COLOR 99                   //c
+#define S_MODE 109                   //m
+#define S_PALETTE 112                //p
+#define S_PALETTE_CHANGE_DIVIDER 113 //q
+#define S_UPDATE_RATE 117            //u
 
 #define S_MODE_Manual 0
 #define S_MODE_Palette 1
@@ -33,6 +43,8 @@ CRGB leds[NUM_LEDS];
 
 uint8_t counter = false;
 
+int paletteChangeDivider = 1000;
+int updatesPerSecond = 10;
 uint8_t currentMode;
 CRGBPalette16 currentPalette;
 TBlendType currentBlending;
@@ -67,7 +79,7 @@ void loop()
         paletteLoop();
     }
 
-    FastLED.delay(1000 / UPDATES_PER_SECOND);
+    FastLED.delay(1000 / updatesPerSecond);
 }
 void checkSerial()
 {
@@ -86,7 +98,13 @@ void checkSerial()
             setMode();
             break;
         case S_PALETTE:
-            setPattette();
+            setPalette();
+            break;
+        case S_PALETTE_CHANGE_DIVIDER:
+            setPaletteChangeDivider();
+            break;
+        case S_UPDATE_RATE:
+            setUpdatesPerSecond();
             break;
         }
     }
@@ -96,20 +114,8 @@ void setMode()
 {
     int mode = Serial.parseInt();
     currentMode = mode;
-    // switch (mode)
-    // {
-    // case S_MODE_MANUAL:
-    //     /* code */
-    //     break;
-    // case S_MODE_PALETTE:
-    //     /* code */
-    //     break;
-    // case S_MODE_PeriodicPalette:
-    //     /* code */
-    //     break;
-    // }
 }
-void setPattette()
+void setPalette()
 {
     int palette = Serial.parseInt();
 
@@ -164,11 +170,31 @@ void setPattette()
 void setBrightness()
 {
     int n = Serial.parseInt();
-    if (n > 255)
-        n = 255;
-    if (n < 0)
-        n = 0;
+    if (n > MAX_BRIGHTNESS)
+        n = MAX_BRIGHTNESS;
+    if (n < MIN_BRIGHTNESS)
+        n = MIN_BRIGHTNESS;
     FastLED.setBrightness(n);
+}
+void setPaletteChangeDivider()
+{
+    delay(15);
+    int n = Serial.parseInt();
+    if (n > MAX_PALETTE_CHANGE_DIVIDER)
+        n = MAX_PALETTE_CHANGE_DIVIDER;
+    if (n < MIN_PALETTE_CHANGE_DIVIDER)
+        n = MIN_PALETTE_CHANGE_DIVIDER;
+    paletteChangeDivider = n;
+    Serial.print(String(n));
+}
+void setUpdatesPerSecond()
+{
+    int n = Serial.parseInt();
+    if (n > MAX_UPDATES_PER_SECOND)
+        n = MAX_UPDATES_PER_SECOND;
+    if (n < MIN_UPDATES_PER_SECOND)
+        n = MIN_UPDATES_PER_SECOND;
+    updatesPerSecond = n;
 }
 void setColor()
 {
@@ -236,8 +262,9 @@ void FillLEDsFromPaletteColors(uint8_t colorIndex)
 
 void ChangePalettePeriodically()
 {
-    uint8_t secondHand = (millis() / 1000) % 60;
+    uint8_t secondHand = (millis() / paletteChangeDivider) % 60;
     static uint8_t lastSecond = 99;
+    // Serial.print(String(secondHand));
 
     if (lastSecond != secondHand)
     {

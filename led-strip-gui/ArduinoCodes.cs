@@ -8,6 +8,8 @@ namespace led_strip_gui
         public const string COLOR = "c";
         public const string MODE = "m";
         public const string PALETTE = "p";
+        public const string UPDATES_PER_SECOND = "u";
+        public const string PALETTE_CHANGE_DIVIDER = "q";
 
         public enum Mode
         {
@@ -34,17 +36,25 @@ namespace led_strip_gui
         {
             return BRIGHTNESS + brightness.ToString();
         }
+        public static string SetUpdatesPerSecondText(int updates)
+        {
+            return UPDATES_PER_SECOND + updates.ToString();
+        }
         public static string SetColorText(Color color)
         {
             return string.Format("{0}{1},{2},{3}", COLOR, (int)color.R, (int)color.B, (int)color.G);
         }
         public static string SetModeText(Mode mode)
         {
-            return MODE + mode.ToString();
+            return MODE + ((int)mode).ToString();
         }
         public static string SetPaletteText(Palette palette)
         {
             return PALETTE + ((int)palette).ToString();
+        }
+        public static string SetPaletteChangeDividerText(int divider)
+        {
+            return PALETTE_CHANGE_DIVIDER + divider.ToString();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO.Ports;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace led_strip_gui
@@ -11,6 +12,8 @@ namespace led_strip_gui
         private static SerialPort port;
         public static event OnData onData;
         public delegate void OnData(byte[] data);
+
+        private static bool waitingForData = false;
 
         /// <summary>
         /// Opens Connection to Serial Port
@@ -50,13 +53,23 @@ namespace led_strip_gui
 
         private static void dataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            byte[] data = new byte[port.BytesToRead];
-            port.Read(data, 0, data.Length);
+            if (waitingForData) { return; }
 
-            if (onData != null)
+            waitingForData = true;
+            new Task(async () =>
             {
-                onData.Invoke(data);
-            }
+                await Task.Delay(50);
+
+                byte[] data = new byte[port.BytesToRead];
+                port.Read(data, 0, data.Length);
+
+                if (onData != null)
+                {
+                    onData.Invoke(data);
+                }
+
+                waitingForData = false;
+            }).Start();
         }
 
         public static void Close()

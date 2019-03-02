@@ -42,6 +42,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.button_updates = new System.Windows.Forms.Button();
+            this.textBox_updates = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.textBox_paletteChangeDivider = new System.Windows.Forms.TextBox();
+            this.noFocus = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // textBox_brightness
@@ -51,14 +56,14 @@
             this.textBox_brightness.Size = new System.Drawing.Size(90, 20);
             this.textBox_brightness.TabIndex = 0;
             this.textBox_brightness.Text = "0";
-            this.textBox_brightness.TextChanged += new System.EventHandler(this.textbox_numberOnly_TextChanged);
             this.textBox_brightness.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textbox_numberOnly_keyPress);
+            this.textBox_brightness.Leave += new System.EventHandler(this.textbox_numberOnly_LeaveFocus);
             // 
             // button_brightness
             // 
-            this.button_brightness.Location = new System.Drawing.Point(255, 108);
+            this.button_brightness.Location = new System.Drawing.Point(248, 108);
             this.button_brightness.Name = "button_brightness";
-            this.button_brightness.Size = new System.Drawing.Size(100, 23);
+            this.button_brightness.Size = new System.Drawing.Size(145, 23);
             this.button_brightness.TabIndex = 1;
             this.button_brightness.Text = "Set Brightness";
             this.button_brightness.UseVisualStyleBackColor = true;
@@ -66,9 +71,9 @@
             // 
             // buttonOpenSerial
             // 
-            this.buttonOpenSerial.Location = new System.Drawing.Point(255, 30);
+            this.buttonOpenSerial.Location = new System.Drawing.Point(248, 30);
             this.buttonOpenSerial.Name = "buttonOpenSerial";
-            this.buttonOpenSerial.Size = new System.Drawing.Size(95, 23);
+            this.buttonOpenSerial.Size = new System.Drawing.Size(145, 23);
             this.buttonOpenSerial.TabIndex = 3;
             this.buttonOpenSerial.Text = "Open Serial";
             this.buttonOpenSerial.UseVisualStyleBackColor = true;
@@ -84,9 +89,9 @@
             // 
             // button_mode
             // 
-            this.button_mode.Location = new System.Drawing.Point(255, 79);
+            this.button_mode.Location = new System.Drawing.Point(248, 79);
             this.button_mode.Name = "button_mode";
-            this.button_mode.Size = new System.Drawing.Size(100, 23);
+            this.button_mode.Size = new System.Drawing.Size(145, 23);
             this.button_mode.TabIndex = 5;
             this.button_mode.Text = "Set Mode";
             this.button_mode.UseVisualStyleBackColor = true;
@@ -94,10 +99,9 @@
             // 
             // button_color
             // 
-            this.button_color.Enabled = false;
-            this.button_color.Location = new System.Drawing.Point(255, 137);
+            this.button_color.Location = new System.Drawing.Point(248, 137);
             this.button_color.Name = "button_color";
-            this.button_color.Size = new System.Drawing.Size(100, 23);
+            this.button_color.Size = new System.Drawing.Size(145, 23);
             this.button_color.TabIndex = 6;
             this.button_color.Text = "Set Color";
             this.button_color.UseVisualStyleBackColor = true;
@@ -105,9 +109,9 @@
             // 
             // button_palette
             // 
-            this.button_palette.Location = new System.Drawing.Point(255, 166);
+            this.button_palette.Location = new System.Drawing.Point(248, 166);
             this.button_palette.Name = "button_palette";
-            this.button_palette.Size = new System.Drawing.Size(100, 23);
+            this.button_palette.Size = new System.Drawing.Size(145, 23);
             this.button_palette.TabIndex = 7;
             this.button_palette.Text = "Set Palette";
             this.button_palette.UseVisualStyleBackColor = true;
@@ -118,7 +122,7 @@
             this.comboBox_palette.FormattingEnabled = true;
             this.comboBox_palette.Location = new System.Drawing.Point(12, 168);
             this.comboBox_palette.Name = "comboBox_palette";
-            this.comboBox_palette.Size = new System.Drawing.Size(237, 21);
+            this.comboBox_palette.Size = new System.Drawing.Size(230, 21);
             this.comboBox_palette.TabIndex = 8;
             // 
             // textBox_color_r
@@ -128,8 +132,8 @@
             this.textBox_color_r.Size = new System.Drawing.Size(50, 20);
             this.textBox_color_r.TabIndex = 9;
             this.textBox_color_r.Text = "255";
-            this.textBox_color_r.TextChanged += new System.EventHandler(this.textbox_numberOnly_TextChanged);
             this.textBox_color_r.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textbox_numberOnly_keyPress);
+            this.textBox_color_r.Leave += new System.EventHandler(this.textbox_numberOnly_LeaveFocus);
             // 
             // textBox_color_g
             // 
@@ -138,8 +142,8 @@
             this.textBox_color_g.Size = new System.Drawing.Size(50, 20);
             this.textBox_color_g.TabIndex = 10;
             this.textBox_color_g.Text = "255";
-            this.textBox_color_g.TextChanged += new System.EventHandler(this.textbox_numberOnly_TextChanged);
             this.textBox_color_g.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textbox_numberOnly_keyPress);
+            this.textBox_color_g.Leave += new System.EventHandler(this.textbox_numberOnly_LeaveFocus);
             // 
             // textBox_color_b
             // 
@@ -148,8 +152,8 @@
             this.textBox_color_b.Size = new System.Drawing.Size(50, 20);
             this.textBox_color_b.TabIndex = 11;
             this.textBox_color_b.Text = "255";
-            this.textBox_color_b.TextChanged += new System.EventHandler(this.textbox_numberOnly_TextChanged);
             this.textBox_color_b.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textbox_numberOnly_keyPress);
+            this.textBox_color_b.Leave += new System.EventHandler(this.textbox_numberOnly_LeaveFocus);
             // 
             // label1
             // 
@@ -178,11 +182,64 @@
             this.label3.TabIndex = 14;
             this.label3.Text = "G";
             // 
+            // button_updates
+            // 
+            this.button_updates.Location = new System.Drawing.Point(248, 195);
+            this.button_updates.Name = "button_updates";
+            this.button_updates.Size = new System.Drawing.Size(145, 23);
+            this.button_updates.TabIndex = 16;
+            this.button_updates.Text = "Set Updates Per Second";
+            this.button_updates.UseVisualStyleBackColor = true;
+            this.button_updates.Click += new System.EventHandler(this.button_updates_Click);
+            // 
+            // textBox_updates
+            // 
+            this.textBox_updates.Location = new System.Drawing.Point(12, 197);
+            this.textBox_updates.Name = "textBox_updates";
+            this.textBox_updates.Size = new System.Drawing.Size(90, 20);
+            this.textBox_updates.TabIndex = 15;
+            this.textBox_updates.Text = "0";
+            this.textBox_updates.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textbox_numberOnly_keyPress);
+            this.textBox_updates.Leave += new System.EventHandler(this.textbox_numberOnly_LeaveFocus);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(248, 224);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(145, 23);
+            this.button1.TabIndex = 18;
+            this.button1.Text = "Set Palette Change Divider";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button_paletteChangeDivider_Click);
+            // 
+            // textBox_paletteChangeDivider
+            // 
+            this.textBox_paletteChangeDivider.Location = new System.Drawing.Point(12, 226);
+            this.textBox_paletteChangeDivider.Name = "textBox_paletteChangeDivider";
+            this.textBox_paletteChangeDivider.Size = new System.Drawing.Size(90, 20);
+            this.textBox_paletteChangeDivider.TabIndex = 17;
+            this.textBox_paletteChangeDivider.Text = "0";
+            this.textBox_paletteChangeDivider.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textbox_numberOnly_keyPress);
+            this.textBox_paletteChangeDivider.Leave += new System.EventHandler(this.textbox_numberOnly_LeaveFocus_Divider);
+            // 
+            // noFocus
+            // 
+            this.noFocus.AutoSize = true;
+            this.noFocus.Location = new System.Drawing.Point(-10, -10);
+            this.noFocus.Name = "noFocus";
+            this.noFocus.Size = new System.Drawing.Size(0, 13);
+            this.noFocus.TabIndex = 19;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(367, 205);
+            this.ClientSize = new System.Drawing.Size(406, 265);
+            this.Controls.Add(this.noFocus);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.textBox_paletteChangeDivider);
+            this.Controls.Add(this.button_updates);
+            this.Controls.Add(this.textBox_updates);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -197,9 +254,12 @@
             this.Controls.Add(this.buttonOpenSerial);
             this.Controls.Add(this.button_brightness);
             this.Controls.Add(this.textBox_brightness);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.Click += new System.EventHandler(this.Form1_Click);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -221,6 +281,11 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button button_updates;
+        private System.Windows.Forms.TextBox textBox_updates;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox textBox_paletteChangeDivider;
+        private System.Windows.Forms.Label noFocus;
     }
 }
 
