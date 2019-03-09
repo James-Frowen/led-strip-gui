@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "led-strip-gui", "led-strip-
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerialDebug", "SerialDebug\SerialDebug.csproj", "{38C36299-D264-49DD-86F3-64587F102FCD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "screen-color", "read-screen-color\screen-color.csproj", "{9F6CB8FC-C59C-46BB-A0D7-322FE829C7EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{38C36299-D264-49DD-86F3-64587F102FCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38C36299-D264-49DD-86F3-64587F102FCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{38C36299-D264-49DD-86F3-64587F102FCD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F6CB8FC-C59C-46BB-A0D7-322FE829C7EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F6CB8FC-C59C-46BB-A0D7-322FE829C7EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F6CB8FC-C59C-46BB-A0D7-322FE829C7EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F6CB8FC-C59C-46BB-A0D7-322FE829C7EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

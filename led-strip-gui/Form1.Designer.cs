@@ -1,4 +1,4 @@
-﻿namespace led_strip_gui
+﻿namespace LedStripGui
 {
     partial class Form1
     {
@@ -44,9 +44,12 @@
             this.label3 = new System.Windows.Forms.Label();
             this.button_updates = new System.Windows.Forms.Button();
             this.textBox_updates = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.button_SetPaletteChangeDivider = new System.Windows.Forms.Button();
             this.textBox_paletteChangeDivider = new System.Windows.Forms.TextBox();
             this.noFocus = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.button_ScreenColorStart = new System.Windows.Forms.Button();
+            this.button_ScreenColorStop = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBox_brightness
@@ -202,15 +205,15 @@
             this.textBox_updates.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textbox_numberOnly_keyPress);
             this.textBox_updates.Leave += new System.EventHandler(this.textbox_numberOnly_LeaveFocus);
             // 
-            // button1
+            // button_SetPaletteChangeDivider
             // 
-            this.button1.Location = new System.Drawing.Point(248, 224);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(145, 23);
-            this.button1.TabIndex = 18;
-            this.button1.Text = "Set Palette Change Divider";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button_paletteChangeDivider_Click);
+            this.button_SetPaletteChangeDivider.Location = new System.Drawing.Point(248, 224);
+            this.button_SetPaletteChangeDivider.Name = "button_SetPaletteChangeDivider";
+            this.button_SetPaletteChangeDivider.Size = new System.Drawing.Size(145, 23);
+            this.button_SetPaletteChangeDivider.TabIndex = 18;
+            this.button_SetPaletteChangeDivider.Text = "Set Palette Change Divider";
+            this.button_SetPaletteChangeDivider.UseVisualStyleBackColor = true;
+            this.button_SetPaletteChangeDivider.Click += new System.EventHandler(this.button_paletteChangeDivider_Click);
             // 
             // textBox_paletteChangeDivider
             // 
@@ -230,13 +233,45 @@
             this.noFocus.Size = new System.Drawing.Size(0, 13);
             this.noFocus.TabIndex = 19;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 299);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(96, 13);
+            this.label4.TabIndex = 20;
+            this.label4.Text = "Send Screen Color";
+            // 
+            // button_ScreenColorStart
+            // 
+            this.button_ScreenColorStart.Location = new System.Drawing.Point(12, 315);
+            this.button_ScreenColorStart.Name = "button_ScreenColorStart";
+            this.button_ScreenColorStart.Size = new System.Drawing.Size(71, 23);
+            this.button_ScreenColorStart.TabIndex = 21;
+            this.button_ScreenColorStart.Text = "Start";
+            this.button_ScreenColorStart.UseVisualStyleBackColor = true;
+            this.button_ScreenColorStart.Click += new System.EventHandler(this.button_ScreenColorStart_Click);
+            // 
+            // button_ScreenColorStop
+            // 
+            this.button_ScreenColorStop.Location = new System.Drawing.Point(87, 315);
+            this.button_ScreenColorStop.Name = "button_ScreenColorStop";
+            this.button_ScreenColorStop.Size = new System.Drawing.Size(71, 23);
+            this.button_ScreenColorStop.TabIndex = 22;
+            this.button_ScreenColorStop.Text = "Stop";
+            this.button_ScreenColorStop.UseVisualStyleBackColor = true;
+            this.button_ScreenColorStop.Click += new System.EventHandler(this.button_ScreenColorStop_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(406, 265);
+            this.ClientSize = new System.Drawing.Size(406, 350);
+            this.Controls.Add(this.button_ScreenColorStop);
+            this.Controls.Add(this.button_ScreenColorStart);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.noFocus);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.button_SetPaletteChangeDivider);
             this.Controls.Add(this.textBox_paletteChangeDivider);
             this.Controls.Add(this.button_updates);
             this.Controls.Add(this.textBox_updates);
@@ -283,9 +318,12 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button_updates;
         private System.Windows.Forms.TextBox textBox_updates;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button_SetPaletteChangeDivider;
         private System.Windows.Forms.TextBox textBox_paletteChangeDivider;
         private System.Windows.Forms.Label noFocus;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button button_ScreenColorStart;
+        private System.Windows.Forms.Button button_ScreenColorStop;
     }
 }
 

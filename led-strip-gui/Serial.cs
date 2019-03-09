@@ -3,7 +3,7 @@ using System.IO.Ports;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace led_strip_gui
+namespace LedStripGui
 {
     public static class Serial
     {
@@ -82,6 +82,12 @@ namespace led_strip_gui
         public static void Send(string text)
         {
             port.Write(text);
+        }
+
+
+        public static void SendBytes(byte[] bytes)
+        {
+            port.Write(bytes, 0, bytes.Length);
         }
     }
 }

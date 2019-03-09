@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace led_strip_gui
+namespace LedStripGui
 {
     public class Settings
     {
@@ -11,12 +11,19 @@ namespace led_strip_gui
         public const int MIN_PALETTE_CHANGE_DIVIDER = 500;
         public const int MAX_PALETTE_CHANGE_DIVIDER = 30000;
 
+        public readonly int ledCount;
         private int _brightness = 4;
         private int _updatesPerSecond = 10;
         private int _paletteChangeDivider = 1000;
+        private bool _rgbControlMode = true;
         public Color color = Color.White;
         public ArduinoCodes.Mode mode = ArduinoCodes.Mode.Manual;
         public ArduinoCodes.Palette palette = ArduinoCodes.Palette.RainbowColors;
+
+        public Settings(int ledCount)
+        {
+            this.ledCount = ledCount;
+        }
 
         public int Brightness
         {
@@ -60,6 +67,19 @@ namespace led_strip_gui
                 if (value > MAX_PALETTE_CHANGE_DIVIDER) { this._paletteChangeDivider = MAX_PALETTE_CHANGE_DIVIDER; }
                 else if (value < MIN_PALETTE_CHANGE_DIVIDER) { this._paletteChangeDivider = MIN_PALETTE_CHANGE_DIVIDER; }
                 else { this._paletteChangeDivider = value; }
+            }
+        }
+
+        public bool RgbControlMode
+        {
+            get
+            {
+                return this._rgbControlMode;
+            }
+
+            set
+            {
+                this._rgbControlMode = value;
             }
         }
     }

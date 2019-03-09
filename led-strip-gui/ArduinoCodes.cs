@@ -1,21 +1,27 @@
 ﻿using System.Drawing;
 
-namespace led_strip_gui
+namespace LedStripGui
 {
     public static class ArduinoCodes
     {
+        public const int LED_COUNT = 60;
+
         public const string BRIGHTNESS = "b";
         public const string COLOR = "c";
         public const string MODE = "m";
         public const string PALETTE = "p";
         public const string UPDATES_PER_SECOND = "u";
         public const string PALETTE_CHANGE_DIVIDER = "q";
+        public const string CONTROL_HUE = "X";
+        public const string CONTROL_RGB = "Y";
+        public const string CONTROL_HVS = "Z";
 
         public enum Mode
         {
-            Manual = 0,
-            Palette = 1,
-            PeriodicPalette = 2,
+            Manual = 0, // user set color
+            Palette = 1, // palette presets
+            PeriodicPalette = 2, // palette presets that change Periodiccally
+            Controlled = 3 // controled by Serial (hue data)
         }
         public enum Palette
         {

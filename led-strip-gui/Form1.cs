@@ -2,11 +2,12 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace led_strip_gui
+namespace LedStripGui
 {
     public partial class Form1 : Form
     {
         public Settings settings;
+        public LEDController ledController;
 
         public Form1()
         {
@@ -21,7 +22,7 @@ namespace led_strip_gui
             var opened = Serial.Open();
             this.buttonOpenSerial.Enabled = !opened;
 
-            this.settings = new Settings();
+            this.settings = new Settings(ArduinoCodes.LED_COUNT);
 
             this.textBox_brightness.Text = this.settings.Brightness.ToString();
             this.textBox_color_r.Text = this.settings.color.R.ToString();
@@ -32,7 +33,16 @@ namespace led_strip_gui
 
             this.comboBox_mode.SelectedIndex = (int)this.settings.mode;
             this.comboBox_palette.SelectedIndex = (int)this.settings.palette;
+
+            this.button_ScreenColorStart.Enabled = false;
+            this.button_ScreenColorStop.Enabled = false;
         }
+
+        private void onChangeModes(ArduinoCodes.Mode mode)
+        {
+            this.button_ScreenColorStart.Enabled = (mode == ArduinoCodes.Mode.Controlled);
+        }
+
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -110,6 +120,8 @@ namespace led_strip_gui
             this.settings.mode = (ArduinoCodes.Mode)this.comboBox_mode.SelectedIndex;
             var msg = ArduinoCodes.SetModeText(this.settings.mode);
             Serial.Send(msg);
+
+            this.onChangeModes(this.settings.mode);
         }
 
         private void button_color_Click(object sender, EventArgs e)
@@ -146,6 +158,26 @@ namespace led_strip_gui
         private void Form1_Click(object sender, EventArgs e)
         {
             this.noFocus.Focus();
+        }
+
+        private void button_ScreenColorStart_Click(object sender, EventArgs e)
+        {
+            this.ledController = new HueLEDController(this.settings);
+            this.ledController.Start();
+
+            this.button_mode.Enabled = false;
+            this.button_ScreenColorStart.Enabled = false;
+            this.button_ScreenColorStop.Enabled = true;
+        }
+
+        private void button_ScreenColorStop_Click(object sender, EventArgs e)
+        {
+            this.ledController.Stop();
+            this.ledController = null;
+
+            this.button_mode.Enabled = true;
+            this.button_ScreenColorStart.Enabled = true;
+            this.button_ScreenColorStop.Enabled = false;
         }
     }
 }

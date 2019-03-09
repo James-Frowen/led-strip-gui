@@ -21,10 +21,14 @@
 #define S_PALETTE 112                //p
 #define S_PALETTE_CHANGE_DIVIDER 113 //q
 #define S_UPDATE_RATE 117            //u
+#define S_CONTROL 88                 //X
+#define S_CONTROL_RGB 89             //Y
+#define S_CONTROL_HVS 90             //Z
 
 #define S_MODE_Manual 0
 #define S_MODE_Palette 1
 #define S_MODE_PeriodicPalette 2
+#define S_MODE_Controlled 3
 
 #define S_PALETTE_RainbowColors 0
 #define S_PALETTE_RainbowStripeColors_NoBlend 1
@@ -79,7 +83,14 @@ void loop()
         paletteLoop();
     }
 
-    FastLED.delay(1000 / updatesPerSecond);
+    int delayTime = 1000 / updatesPerSecond;
+    // if controlled wait less time so that Serial is checked more often
+    if (currentMode == S_MODE_Controlled)
+    {
+        delayTime /= 10;
+    }
+
+    FastLED.delay(delayTime);
 }
 void checkSerial()
 {
@@ -89,22 +100,40 @@ void checkSerial()
         switch (code)
         {
         case S_BRIGHTNESS:
+            Serial.println("S_BRIGHTNESS");
             setBrightness();
             break;
         case S_COLOR:
+            Serial.println("S_COLOR");
             setColor();
             break;
         case S_MODE:
+            Serial.println("S_MODE");
             setMode();
             break;
         case S_PALETTE:
+            Serial.println("S_PALETTE");
             setPalette();
             break;
         case S_PALETTE_CHANGE_DIVIDER:
+            Serial.println("S_PALETTE_CHANGE_DIVIDER");
             setPaletteChangeDivider();
             break;
         case S_UPDATE_RATE:
+            Serial.println("S_UPDATE_RATE");
             setUpdatesPerSecond();
+            break;
+        case S_CONTROL:
+            Serial.println("S_CONTROL");
+            updateFromControl();
+            break;
+        case S_CONTROL_RGB:
+            Serial.println("S_CONTROL_RGB");
+            updateFromControlRGB();
+            break;
+        case S_CONTROL_HVS:
+            Serial.println("S_CONTROL_HVS");
+            updateFromControlHVS();
             break;
         }
     }
@@ -224,6 +253,77 @@ void setColor()
     }
 
     FastLED.show();
+}
+
+void updateFromControlWait()
+{
+    int timeout = 0;
+    while (!Serial.available())
+    {
+        delay(1);
+        timeout++;
+        if (timeout = 1000)
+        {
+            break;
+        }
+    }
+}
+void updateFromControl()
+{
+    updateFromControlWait();
+    if (Serial.available())
+    {
+        delay(10); // wait for some time to make sure all data has been sent
+        uint8_t bytes[NUM_LEDS];
+        Serial.readBytes(bytes, NUM_LEDS);
+
+        for (int i = 0; i < NUM_LEDS; i++)
+        {
+            leds[i] = CHSV(bytes[i], 255, 255);
+        }
+
+        FastLED.show();
+    }
+}
+void updateFromControlRGB()
+{
+    updateFromControlWait();
+    if (Serial.available())
+    {
+        delay(20); // wait for some time to make sure all data has been sent
+        uint8_t bytes[NUM_LEDS * 3];
+        Serial.readBytes(bytes, NUM_LEDS * 3);
+
+        for (int i = 0; i < NUM_LEDS; i++)
+        {
+            uint8_t r = bytes[i * 3];
+            uint8_t g = bytes[i * 3 + 1];
+            uint8_t b = bytes[i * 3 + 2];
+            leds[i] = CRGB(r, g, b);
+        }
+
+        FastLED.show();
+    }
+}
+void updateFromControlHVS()
+{
+    updateFromControlWait();
+    if (Serial.available())
+    {
+        delay(20); // wait for some time to make sure all data has been sent
+        uint8_t bytes[NUM_LEDS * 3];
+        Serial.readBytes(bytes, NUM_LEDS * 3);
+
+        for (int i = 0; i < NUM_LEDS; i++)
+        {
+            uint8_t h = bytes[i * 3];
+            uint8_t s = bytes[i * 3 + 1];
+            uint8_t b = bytes[i * 3 + 2];
+            leds[i] = CHSV(h, s, b);
+        }
+
+        FastLED.show();
+    }
 }
 
 void paletteLoop()

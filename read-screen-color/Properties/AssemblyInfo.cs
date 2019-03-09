@@ -1,14 +1,15 @@
 ﻿using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("led-strip-gui")]
+[assembly: AssemblyTitle("read-screen-color")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("led-strip-gui")]
+[assembly: AssemblyProduct("read-screen-color")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("ea97bc2a-178f-497d-86b9-a0a8d6740e65")]
+[assembly: Guid("9f6cb8fc-c59c-46bb-a0d7-322fe829c7ef")]
 
 // Version information for an assembly consists of the following four values:
 //

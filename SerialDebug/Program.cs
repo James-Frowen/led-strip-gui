@@ -1,4 +1,4 @@
-﻿using led_strip_gui;
+﻿using LedStripGui;
 using System;
 using System.Text;
 using System.Threading;
