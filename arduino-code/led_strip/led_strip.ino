@@ -1,7 +1,9 @@
 #include <FastLED.h>
 
+#define DEBUG true
+
 #define LED_PIN 5
-#define NUM_LEDS 60
+#define NUM_LEDS 120
 #define LED_TYPE WS2811
 #define COLOR_ORDER GRB
 
@@ -29,6 +31,7 @@
 #define S_MODE_Palette 1
 #define S_MODE_PeriodicPalette 2
 #define S_MODE_Controlled 3
+#define S_MODE_LineFlash 4
 
 #define S_PALETTE_RainbowColors 0
 #define S_PALETTE_RainbowStripeColors_NoBlend 1
@@ -43,6 +46,8 @@
 #define S_PALETTE_RedWhiteBluePalette 10
 // END serial codes
 
+#define SERIAL_BUFFER_LENGTH 256
+
 CRGB leds[NUM_LEDS];
 
 uint8_t counter = false;
@@ -55,6 +60,14 @@ TBlendType currentBlending;
 
 extern CRGBPalette16 myRedWhiteBluePalette;
 extern const TProgmemPalette16 myRedWhiteBluePalette_p PROGMEM;
+
+// LineFlash
+const bool reverse = false;
+const int8_t LineFlash_Length = 4;
+const int8_t LineFlash_DecayLength = 8;
+int LineFlash_values[NUM_LEDS];
+int offset = 0;
+bool forward = true;
 
 void setup()
 {
@@ -72,6 +85,8 @@ void setup()
         leds[i] = CRGB::White;
     }
 
+    setupLineFlash();
+
     FastLED.show();
 }
 void loop()
@@ -81,6 +96,10 @@ void loop()
     if (currentMode == S_MODE_Palette || currentMode == S_MODE_PeriodicPalette)
     {
         paletteLoop();
+    }
+    if (currentMode == S_MODE_LineFlash)
+    {
+        lineFlash();
     }
 
     int delayTime = 1000 / updatesPerSecond;
@@ -227,9 +246,9 @@ void setUpdatesPerSecond()
 }
 void setColor()
 {
-    int r = Serial.parseInt();
-    int g = Serial.parseInt();
-    int b = Serial.parseInt();
+    int r = Serial.read();
+    int g = Serial.read();
+    int b = Serial.read();
 
     if (r > 255)
         r = 255;
@@ -246,6 +265,11 @@ void setColor()
         b = 0;
 
     CRGB color = CRGB(r, g, b);
+#ifdef DEBUG
+    Serial.println(String(r));
+    Serial.println(String(g));
+    Serial.println(String(b));
+#endif
 
     for (int i = 0; i < NUM_LEDS; i++)
     {
@@ -511,3 +535,45 @@ const TProgmemPalette16 myRedWhiteBluePalette_p PROGMEM =
 // palette to Green (0,255,0) and Blue (0,0,255), and then retrieved
 // the first sixteen entries from the virtual palette (of 256), you'd get
 // Green, followed by a smooth gradient from green-to-blue, and then Blue.
+
+void setupLineFlash()
+{
+    for (int i = 0; i < LineFlash_Length; i++)
+    {
+        LineFlash_values[i] = 255;
+    }
+    for (int i = 0; i < LineFlash_DecayLength; i++)
+    {
+        float indexPlusOne = i + 1;
+        float MaxPlusOne = LineFlash_DecayLength + 1;
+        float percent = (indexPlusOne / MaxPlusOne);
+        float oneMinusPercent = 1 - percent;
+        oneMinusPercent = oneMinusPercent * oneMinusPercent;
+        LineFlash_values[i + LineFlash_Length] = 255 * oneMinusPercent;
+    }
+}
+
+void lineFlash()
+{
+    int hue = HUE_RED;
+    for (int i = 0; i < NUM_LEDS; i++)
+    {
+        int index = i + offset;
+        if (index > NUM_LEDS)
+        {
+            index -= NUM_LEDS;
+        }
+
+        leds[i] = CHSV(hue, 255, LineFlash_values[index]);
+    }
+
+    if (forward)
+        offset++;
+    else
+        offset--;
+
+    if (offset > NUM_LEDS)
+    {
+        offset -= NUM_LEDS;
+    }
+}
