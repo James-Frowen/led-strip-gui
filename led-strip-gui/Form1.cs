@@ -111,15 +111,14 @@ namespace LedStripGui
         private void button_brightness_Click(object sender, System.EventArgs e)
         {
             this.settings.Brightness = int.Parse(this.textBox_brightness.Text);
-            var msg = ArduinoCodes.SetBrightnessText(this.settings.Brightness);
-            Serial.Send(msg);
+            Serial.SendValue((byte)this.settings.Brightness, ArduinoCodes.MessageType.BRIGHTNESS);
         }
 
         private void button_mode_Click(object sender, EventArgs e)
         {
             this.settings.mode = (ArduinoCodes.Mode)this.comboBox_mode.SelectedIndex;
-            var msg = ArduinoCodes.SetModeText(this.settings.mode);
-            Serial.Send(msg);
+
+            Serial.SendValue((byte)this.settings.mode, ArduinoCodes.MessageType.MODE);
 
             this.onChangeModes(this.settings.mode);
         }
@@ -130,29 +129,28 @@ namespace LedStripGui
             var g = int.Parse(this.textBox_color_g.Text);
             var b = int.Parse(this.textBox_color_b.Text);
             this.settings.color = Color.FromArgb(r, g, b);
-            var msg = ArduinoCodes.SetColorText(this.settings.color);
-            Serial.Send(msg);
+            Serial.SendColor(this.settings.color);
         }
 
         private void button_palette_Click(object sender, EventArgs e)
         {
             this.settings.palette = (ArduinoCodes.Palette)this.comboBox_palette.SelectedIndex;
-            var msg = ArduinoCodes.SetPaletteText(this.settings.palette);
-            Serial.Send(msg);
+
+            Serial.SendValue((byte)this.settings.palette, ArduinoCodes.MessageType.PALETTE);
         }
 
         private void button_updates_Click(object sender, EventArgs e)
         {
             this.settings.UpdatesPerSecond = int.Parse(this.textBox_updates.Text);
-            var msg = ArduinoCodes.SetUpdatesPerSecondText(this.settings.UpdatesPerSecond);
-            Serial.Send(msg);
+
+            Serial.SendValue((byte)this.settings.UpdatesPerSecond, ArduinoCodes.MessageType.UPDATES_PER_SECOND);
         }
 
         private void button_paletteChangeDivider_Click(object sender, EventArgs e)
         {
             this.settings.PaletteChangeDivider = int.Parse(this.textBox_paletteChangeDivider.Text);
-            var msg = ArduinoCodes.SetPaletteChangeDividerText(this.settings.PaletteChangeDivider);
-            Serial.Send(msg);
+
+            Serial.SendValue((short)this.settings.PaletteChangeDivider, ArduinoCodes.MessageType.PALETTE_CHANGE_DIVIDER);
         }
 
         private void Form1_Click(object sender, EventArgs e)
@@ -162,7 +160,8 @@ namespace LedStripGui
 
         private void button_ScreenColorStart_Click(object sender, EventArgs e)
         {
-            this.ledController = new HueLEDController(this.settings);
+            this.ledController = new HueCyleLEDController(this.settings);
+            //this.ledController = new ScreenLEDController(this.settings);
             this.ledController.Start();
 
             this.button_mode.Enabled = false;
