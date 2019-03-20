@@ -19,6 +19,7 @@ namespace SerialDebug
         private static void onData(byte[] data)
         {
             var text = Encoding.ASCII.GetString(data);
+            Console.WriteLine(DateTime.Now.TimeOfDay);
             Console.WriteLine(text);
             //foreach (var item in data)
             //{
