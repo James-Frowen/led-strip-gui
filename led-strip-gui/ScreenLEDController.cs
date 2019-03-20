@@ -35,9 +35,10 @@ namespace LedStripGui
                 controlCode = ArduinoCodes.CONTROL_HUE;
             }
 
+            throw new System.NotImplementedException();
 
-            Serial.Send(controlCode);
-            Serial.SendBytes(bytes);
+            //Serial.Send(controlCode);
+            //Serial.SendBytes(bytes);
         }
 
         private byte[] getRGBBytes(Color[] colors)
@@ -58,7 +59,7 @@ namespace LedStripGui
             for (int i = 0; i < this.count; i++)
             {
                 bytes[i * 3] = colors[i].GetByteHue();
-                bytes[i * 3 + 1] = colors[i].GetByteSaturation(1);
+                bytes[i * 3 + 1] = colors[i].GetByteSaturation(1.5f);
                 bytes[i * 3 + 2] = colors[i].GetByteValue();
             }
 
@@ -83,37 +84,6 @@ namespace LedStripGui
             this.readScreenColor.CopyFromScreen();
             var colors = this.readScreenColor.GraphicsDrawImage();
             return colors;
-        }
-    }
-    public static class ColorExtension
-    {
-        public static byte GetByteHue(this Color c)
-        {
-            var hue = c.GetHue();
-            // hue range from 0 to 360
-            var b = (byte)((int)(hue / 360f * 255f));
-
-            return b;
-        }
-        public static byte GetByteSaturation(this Color c, float saturationIncrease = 1f)
-        {
-            var colorSat = c.GetSaturation();
-            // increase saturation by halving the distance to 1
-            var oneMinusSat = 1 - colorSat;
-            var realSat = 1 - (oneMinusSat / saturationIncrease);
-
-            // sat range from 0 to 1
-            var b = (byte)((int)(realSat * 255f));
-
-            return b;
-        }
-        public static byte GetByteValue(this Color c)
-        {
-            var val = c.GetBrightness();
-            // val range from 0 to 1
-            var b = (byte)((int)(val * 255f));
-
-            return b;
         }
     }
 }

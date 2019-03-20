@@ -2,26 +2,20 @@
 
 namespace LedStripGui
 {
-    public class HueLEDController : ThreadLEDController
+    public class HueCyleLEDController : ThreadLEDController
     {
         private int steps = 1;
-        private byte[] bytes;
 
-        public HueLEDController(Settings settings) : base(settings)
+        public HueCyleLEDController(Settings settings) : base(settings)
         {
-            this.bytes = new byte[this.count];
         }
 
         protected override IEnumerator loop()
         {
-            for (int hue = 0; hue < 255; hue += this.steps)
+            for (int hue = 0; hue < 360; hue += this.steps)
             {
-                for (int i = 0; i < this.count; i++)
-                {
-                    this.bytes[i] = (byte)hue;
-                }
-                Serial.Send(ArduinoCodes.CONTROL_HUE);
-                Serial.SendBytes(this.bytes);
+                var color = ColorHelper.HueToColor(hue);
+                Serial.SendColor(color);
 
                 yield return null;
             }

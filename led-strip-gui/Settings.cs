@@ -15,7 +15,7 @@ namespace LedStripGui
         private int _brightness = 4;
         private int _updatesPerSecond = 10;
         private int _paletteChangeDivider = 1000;
-        private bool _rgbControlMode = true;
+        private bool _rgbControlMode = false;
         public Color color = Color.White;
         public ArduinoCodes.Mode mode = ArduinoCodes.Mode.Manual;
         public ArduinoCodes.Palette palette = ArduinoCodes.Palette.RainbowColors;
