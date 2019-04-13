@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.textBox_brightness = new System.Windows.Forms.TextBox();
             this.button_brightness = new System.Windows.Forms.Button();
             this.buttonOpenSerial = new System.Windows.Forms.Button();
@@ -290,6 +291,7 @@
             this.Controls.Add(this.button_brightness);
             this.Controls.Add(this.textBox_brightness);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Form1";
