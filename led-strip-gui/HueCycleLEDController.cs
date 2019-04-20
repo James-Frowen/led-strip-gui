@@ -2,12 +2,13 @@
 
 namespace LedStripGui
 {
-    public class HueCyleLEDController : ThreadLEDController
+    public class HueCycleLEDController : ThreadLEDController
     {
-        private int steps = 1;
+        private readonly int steps;
 
-        public HueCyleLEDController(Settings settings) : base(settings)
+        public HueCycleLEDController(Settings settings) : base(settings)
         {
+            this.steps = 1;
         }
 
         protected override IEnumerator loop()
