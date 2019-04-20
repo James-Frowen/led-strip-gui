@@ -58,7 +58,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="HueLEDController.cs" />
+    <Compile Include="HueCycleLEDController.cs" />
     <Compile Include="HuePingPongLEDController.cs" />
     <Compile Include="LEDController.cs" />
     <Compile Include="Program.cs" />
@@ -67,6 +67,7 @@
     <Compile Include="ScreenLEDController.cs" />
     <Compile Include="Serial.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="SmoothRandomLEDController.cs" />
     <Compile Include="ThreadLEDController.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

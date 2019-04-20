@@ -7,11 +7,43 @@ namespace LedStripGui
         public static Color HueToColor(int hue)
         {
             if (hue > 360) { hue -= 360; }
-            if (hue < 0) { hue += 360; }
+            if (hue <= 0) { hue += 360; }
             int r, g, b;
             HlsToRgb(hue, 0.5, 1, out r, out g, out b);
             return Color.FromArgb(r, g, b);
         }
+
+        public static Color RandomHue()
+        {
+            var rand = new System.Random();
+
+            var hue = rand.Next(360);
+
+            return HueToColor(hue);
+        }
+        public static Color Random()
+        {
+            var rand = new System.Random();
+
+            var r = rand.Next(256);
+            var g = rand.Next(256);
+            var b = rand.Next(256);
+
+            return Color.FromArgb(r, g, b);
+        }
+        public static Color Lerp(Color c1, Color c2, float v)
+        {
+            var r = _lerp(c1.R, c2.R, v);
+            var g = _lerp(c1.G, c2.G, v);
+            var b = _lerp(c1.B, c2.B, v);
+
+            return Color.FromArgb(r, g, b);
+        }
+        private static int _lerp(int a, int b, float v)
+        {
+            return a + (int)(v * (b - a));
+        }
+
         // Convert an HLS value into an RGB value.
         /// <summary>
         /// 

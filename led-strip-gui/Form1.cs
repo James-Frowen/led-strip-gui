@@ -160,7 +160,8 @@ namespace LedStripGui
 
         private void button_ScreenColorStart_Click(object sender, EventArgs e)
         {
-            this.ledController = new HueCyleLEDController(this.settings);
+            this.ledController = new SmoothRandomLEDController(this.settings);
+            //this.ledController = new HueCycleLEDController(this.settings);
             //this.ledController = new ScreenLEDController(this.settings);
             this.ledController.Start();
 
