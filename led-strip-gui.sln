@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerialDebug", "SerialDebug\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "screen-color", "read-screen-color\screen-color.csproj", "{9F6CB8FC-C59C-46BB-A0D7-322FE829C7EF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "interactive-audio-console", "interactive-audio-console\interactive-audio-console.csproj", "{C8AF1A8B-79B9-4B31-BA35-5854C4285699}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "interactive-audio", "interactive-audio\interactive-audio.csproj", "{A2D34846-68C6-463F-A481-D8FEF3CBFF6D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{9F6CB8FC-C59C-46BB-A0D7-322FE829C7EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F6CB8FC-C59C-46BB-A0D7-322FE829C7EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F6CB8FC-C59C-46BB-A0D7-322FE829C7EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8AF1A8B-79B9-4B31-BA35-5854C4285699}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8AF1A8B-79B9-4B31-BA35-5854C4285699}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8AF1A8B-79B9-4B31-BA35-5854C4285699}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8AF1A8B-79B9-4B31-BA35-5854C4285699}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2D34846-68C6-463F-A481-D8FEF3CBFF6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2D34846-68C6-463F-A481-D8FEF3CBFF6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2D34846-68C6-463F-A481-D8FEF3CBFF6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2D34846-68C6-463F-A481-D8FEF3CBFF6D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
