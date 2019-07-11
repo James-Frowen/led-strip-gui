@@ -1,4 +1,5 @@
-﻿using NAudio.Wave;
+﻿using LedStrip.Forms;
+using NAudio.Wave;
 using System;
 using System.Drawing;
 
@@ -7,12 +8,14 @@ namespace interactive_audio
     public abstract class BaseRenderer : IDisposable, IAudioRenderer
     {
         private const int NUMBER_OF_LEDS = 120;
-        protected readonly int width;
-        protected readonly int height;
+        protected readonly int formWidth;
+        protected readonly int formHeight;
+        private readonly FormRenderer renderer;
         public int pixelsPerLine;
-        protected readonly Graphics gfx;
+
         protected bool disposed = false;
 
+        protected Graphics GFX => this.renderer.GFX;
 
         public BaseRenderer(ImageForm form)
         {
@@ -21,10 +24,14 @@ namespace interactive_audio
                 throw new ArgumentNullException(nameof(form));
             }
 
-            this.width = form.Width;
-            this.height = form.Height;
-            this.pixelsPerLine = this.width / NUMBER_OF_LEDS;
-            this.gfx = form.CreateGraphics();
+            this.formWidth = form.Width;
+            this.formHeight = form.Height;
+            this.pixelsPerLine = this.formWidth / NUMBER_OF_LEDS;
+            this.renderer = new FormRenderer(form, this.formWidth, this.formHeight);
+        }
+        protected void finishDraw()
+        {
+            this.renderer.FinishDraw();
         }
 
         public abstract void OnData(WaveInEventArgs a);
@@ -33,8 +40,10 @@ namespace interactive_audio
         {
             if (this.disposed) { return; }
 
-            this.gfx.Dispose();
+            this.renderer.Dispose();
             this._dispose();
+
+            this.disposed = true;
         }
         protected abstract void _dispose();
     }

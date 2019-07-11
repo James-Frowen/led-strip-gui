@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace interactive_audio
@@ -44,11 +43,6 @@ namespace interactive_audio
         public ImageForm()
         {
             this.InitializeComponent();
-        }
-
-        public Graphics GetGraphics()
-        {
-            return this.CreateGraphics();
         }
     }
 }

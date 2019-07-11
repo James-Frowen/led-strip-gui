@@ -25,7 +25,7 @@ namespace interactive_audio
 
         public override void OnData(WaveInEventArgs a)
         {
-            var width = this.width / this.pixelsPerLine;
+            var width = this.formWidth / this.pixelsPerLine;
             int bytesPerSample = 4;
             var samples = a.BytesRecorded / (bytesPerSample);
             int samplesPerPixel = samples / width;
@@ -47,12 +47,12 @@ namespace interactive_audio
                 averages[x] = sum / samplesPerPixel;
             }
 
-            this.draw(averages, DrawMode.Line, this.height);
+            this.draw(averages, DrawMode.Line, this.formHeight);
         }
 
         private void draw(float[] averages, DrawMode drawMode, float scale)
         {
-            this.gfx.Clear(Color.FromArgb(100, Color.Black));
+            this.GFX.Clear(Color.FromArgb(100, Color.Black));
             switch (drawMode)
             {
                 case DrawMode.Solid:
@@ -78,10 +78,10 @@ namespace interactive_audio
                 var brush = this.getColor(value);
 
                 // wave from 0 to 2
-                var amp = value * this.height;
-                float y = this.height / 2 + (amp >= 0 ? 0 : amp);
+                var amp = value * this.formHeight;
+                float y = this.formHeight / 2 + (amp >= 0 ? 0 : amp);
                 float height = Math.Abs(amp);
-                this.gfx.FillRectangle(brush, x * this.pixelsPerLine, y, this.pixelsPerLine, height);
+                this.GFX.FillRectangle(brush, x * this.pixelsPerLine, y, this.pixelsPerLine, height);
             }
         }
         private void drawPoint(float[] averages, float scale)
@@ -91,19 +91,19 @@ namespace interactive_audio
                 var value = (averages[x] * scale);
                 var brush = this.getColor(value);
                 // wave from 0 to 2
-                var amp = value * this.height;
-                float y = this.height / 2 + this.pixelsPerLine / 2 + amp;
+                var amp = value * this.formHeight;
+                float y = this.formHeight / 2 + this.pixelsPerLine / 2 + amp;
                 float height = this.pixelsPerLine;
-                this.gfx.FillRectangle(brush, x * this.pixelsPerLine, y, this.pixelsPerLine, height);
+                this.GFX.FillRectangle(brush, x * this.pixelsPerLine, y, this.pixelsPerLine, height);
             }
         }
         private void drawLine(float[] averages, float scale)
         {
             for (int x = 0; x < averages.Length - 1; x++)
             {
-                var y1 = (averages[x] * scale) + this.height / 2;
-                var y2 = (averages[x + 1] * scale) + this.height / 2;
-                this.gfx.DrawLine(this.pen, x * this.pixelsPerLine, y1, (x + 1) * this.pixelsPerLine, y2);
+                var y1 = (averages[x] * scale) + this.formHeight / 2;
+                var y2 = (averages[x + 1] * scale) + this.formHeight / 2;
+                this.GFX.DrawLine(this.pen, x * this.pixelsPerLine, y1, (x + 1) * this.pixelsPerLine, y2);
             }
         }
 

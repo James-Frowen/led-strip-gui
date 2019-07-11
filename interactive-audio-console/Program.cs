@@ -47,6 +47,7 @@ namespace interactive_audio_console
 
                    var audio = new AudioDrawing(Form, Renderer.FFT)
                    {
+                       ShouldLogTime = false
                    };
                    audio.Start();
                }).Start();

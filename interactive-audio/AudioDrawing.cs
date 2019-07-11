@@ -13,9 +13,11 @@ namespace interactive_audio
         private readonly ImageForm form;
         private readonly Renderer rendererType;
 
+        public bool ShouldLogTime { get; set; }
+
         private WasapiLoopbackCapture capture;
         private DateTime then;
-        public IAudioRenderer renderer;
+        private IAudioRenderer renderer;
         private bool disposed = false;
 
 
@@ -54,7 +56,11 @@ namespace interactive_audio
 
         private void capture_DataAvailable(object s, WaveInEventArgs a)
         {
-            this.logTime(a);
+            if (this.ShouldLogTime)
+            {
+                this.logTime(a);
+            }
+
             this.renderer.OnData(a);
         }
 
@@ -86,6 +92,8 @@ namespace interactive_audio
             {
                 this.renderer.Dispose();
             }
+
+            this.disposed = true;
         }
     }
 }

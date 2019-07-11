@@ -145,6 +145,8 @@ namespace interactive_audio
             {
                 this.renderer.Dispose();
             }
+
+            this.disposed = true;
         }
     }
 }
