@@ -1,16 +1,20 @@
 ﻿using System.Collections;
 using System.Threading;
 
-namespace LedStripGui
+namespace LedStrip.Controllers
 {
     public abstract class ThreadLEDController : LEDController
     {
+        public const int DEFAULT_UPDATES_PER_SECOND = 10;
         private Thread activeThread;
         private bool started;
         private bool stopThread = false;
 
-        public ThreadLEDController(Settings settings) : base(settings)
+        public int UpdatesPerSecond { get; set; }
+
+        public ThreadLEDController(ILedMessageSender messageSender, int updatesPerSecond) : base(messageSender)
         {
+            this.UpdatesPerSecond = updatesPerSecond;
         }
 
         private void thread()
@@ -31,7 +35,7 @@ namespace LedStripGui
         }
         protected void sleep()
         {
-            var sleepTime = 1000 / this.settings.UpdatesPerSecond;
+            var sleepTime = 1000 / this.UpdatesPerSecond;
             Thread.Sleep(sleepTime);
         }
 

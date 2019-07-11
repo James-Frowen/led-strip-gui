@@ -1,4 +1,5 @@
-﻿using LedStripGui;
+﻿using LedStrip;
+using LedStripGui;
 using System;
 using System.Text;
 using System.Threading;
@@ -10,7 +11,7 @@ namespace SerialDebug
         [STAThread]
         private static void Main(string[] args)
         {
-            new Thread(() => new Form1().ShowDialog()).Start();
+            new Thread(() => new LEDStripForm().ShowDialog()).Start();
 
             Serial.onData += onData;
             Console.ReadLine();
@@ -21,23 +22,7 @@ namespace SerialDebug
             var text = Encoding.ASCII.GetString(data);
             Console.WriteLine(DateTime.Now.TimeOfDay);
             Console.WriteLine(text);
-            //foreach (var item in data)
-            //{
-            //    Console.WriteLine(item);
-            //}
             Console.WriteLine();
-
-            //int b;
-
-            //if (int.TryParse(data, out b))
-            //{
-            //    char c = (char)b;
-            //    Console.Write(b);
-            //}
-            //else
-            //{
-            //    Console.Write(data);
-            //}
         }
     }
 }

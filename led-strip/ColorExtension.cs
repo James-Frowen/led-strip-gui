@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace LedStripGui
+namespace LedStrip
 {
     public static class ColorExtension
     {
@@ -34,3 +34,4 @@ namespace LedStripGui
         }
     }
 }
+

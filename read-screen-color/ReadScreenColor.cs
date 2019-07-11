@@ -16,10 +16,11 @@ namespace ScreenColor
 
         public static float PerSecond = 5f;
 
-        private Stopwatch stopwatch;
         public static Size ScreenSize = new Size(1920, 1080);
         public static int PartSize = 100;
         public static Size AverageSize = new Size(16 * 120, 9 * 120);
+
+        private Stopwatch stopwatch;
         //private Bitmap[,] screenPixels;
         private Bitmap screen = new Bitmap(ScreenSize.Width, ScreenSize.Height, PixelFormat.Format32bppArgb);
         private Bitmap screenTop = new Bitmap(ScreenSize.Width, PartSize, PixelFormat.Format32bppArgb);
@@ -188,6 +189,21 @@ namespace ScreenColor
             }
             return colors;
         }
+        public void GraphicsDrawImageNonAlloc(Color[] colors)
+        {
+            Debug.Assert(colors.Length == AverageSize.Width, "Length of color array should be save as average size width");
+
+            using (Graphics gavg = Graphics.FromImage(this.average))
+            {
+                gavg.DrawImage(this.screen, 0, 0, AverageSize.Width, 1);
+            }
+
+            for (int i = 0; i < AverageSize.Width; i++)
+            {
+                colors[i] = this.average.GetPixel(i, 0);
+            }
+        }
+
         public Color[] LoopSumAverage()
         {
             var colorSums = new ColorSum[AverageSize.Width];

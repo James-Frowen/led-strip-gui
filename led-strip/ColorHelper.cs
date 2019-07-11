@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace LedStripGui
+namespace LedStrip
 {
     public static class ColorHelper
     {
@@ -117,3 +117,4 @@ namespace LedStripGui
         }
     }
 }
+

@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{EA97BC2A-178F-497D-86B9-A0A8D6740E65}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>led_strip_gui</RootNamespace>
+    <RootNamespace>LedStripGui</RootNamespace>
     <AssemblyName>led-strip-gui</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -49,28 +49,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArduinoCodes.cs" />
-    <Compile Include="ColorExtension.cs" />
-    <Compile Include="ColorHelper.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="LEDStripForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="LEDStripForm.Designer.cs">
+      <DependentUpon>LEDStripForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="HueCycleLEDController.cs" />
-    <Compile Include="HuePingPongLEDController.cs" />
-    <Compile Include="LEDController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RandomLEDController.cs" />
-    <Compile Include="ScreenLEDController.cs" />
-    <Compile Include="Serial.cs" />
     <Compile Include="Settings.cs" />
-    <Compile Include="SmoothRandomLEDController.cs" />
-    <Compile Include="ThreadLEDController.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="LEDStripForm.resx">
+      <DependentUpon>LEDStripForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -94,6 +83,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\led-strip-simulation\led-strip-simulation.csproj">
+      <Project>{B8D0867C-F437-4877-B955-5CABEB36CA5A}</Project>
+      <Name>led-strip-simulation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\led-strip\led-strip.csproj">
+      <Project>{91b48a0b-eaae-4345-b9d2-043294613225}</Project>
+      <Name>led-strip</Name>
+    </ProjectReference>
     <ProjectReference Include="..\read-screen-color\screen-color.csproj">
       <Project>{9F6CB8FC-C59C-46BB-A0D7-322FE829C7EF}</Project>
       <Name>screen-color</Name>

@@ -1,24 +1,19 @@
-﻿using System.Drawing;
+﻿using LedStrip;
+using System.Drawing;
 
 namespace LedStripGui
 {
+    [System.Obsolete("Old form settings")]
     public class Settings
     {
-        public const int MIN_BRIGHTNESS = 0;
-        public const int MAX_BRIGHTNESS = 255;
-        public const int MIN_UPDATES_PER_SECOND = 0;
-        public const int MAX_UPDATES_PER_SECOND = 200;
-        public const int MIN_PALETTE_CHANGE_DIVIDER = 500;
-        public const int MAX_PALETTE_CHANGE_DIVIDER = 30000;
-
         public readonly int ledCount;
         private int _brightness = 4;
         private int _updatesPerSecond = 10;
         private int _paletteChangeDivider = 1000;
         private bool _rgbControlMode = false;
         public Color color = Color.White;
-        public ArduinoCodes.Mode mode = ArduinoCodes.Mode.Manual;
-        public ArduinoCodes.Palette palette = ArduinoCodes.Palette.RainbowColors;
+        public Codes.Mode mode = Codes.Mode.Manual;
+        public Codes.Palette palette = Codes.Palette.RainbowColors;
 
         public Settings(int ledCount)
         {
@@ -34,8 +29,8 @@ namespace LedStripGui
 
             set
             {
-                if (value > MAX_BRIGHTNESS) { this._brightness = MAX_BRIGHTNESS; }
-                else if (value < MIN_BRIGHTNESS) { this._brightness = MIN_BRIGHTNESS; }
+                if (value > Codes.MAX_BRIGHTNESS) { this._brightness = Codes.MAX_BRIGHTNESS; }
+                else if (value < Codes.MIN_BRIGHTNESS) { this._brightness = Codes.MIN_BRIGHTNESS; }
                 else { this._brightness = value; }
             }
         }
@@ -49,8 +44,8 @@ namespace LedStripGui
 
             set
             {
-                if (value > MAX_UPDATES_PER_SECOND) { this._updatesPerSecond = MAX_UPDATES_PER_SECOND; }
-                else if (value < MIN_UPDATES_PER_SECOND) { this._updatesPerSecond = MIN_UPDATES_PER_SECOND; }
+                if (value > Codes.MAX_UPDATES_PER_SECOND) { this._updatesPerSecond = Codes.MAX_UPDATES_PER_SECOND; }
+                else if (value < Codes.MIN_UPDATES_PER_SECOND) { this._updatesPerSecond = Codes.MIN_UPDATES_PER_SECOND; }
                 else { this._updatesPerSecond = value; }
             }
         }
@@ -64,8 +59,8 @@ namespace LedStripGui
 
             set
             {
-                if (value > MAX_PALETTE_CHANGE_DIVIDER) { this._paletteChangeDivider = MAX_PALETTE_CHANGE_DIVIDER; }
-                else if (value < MIN_PALETTE_CHANGE_DIVIDER) { this._paletteChangeDivider = MIN_PALETTE_CHANGE_DIVIDER; }
+                if (value > Codes.MAX_PALETTE_CHANGE_DIVIDER) { this._paletteChangeDivider = Codes.MAX_PALETTE_CHANGE_DIVIDER; }
+                else if (value < Codes.MIN_PALETTE_CHANGE_DIVIDER) { this._paletteChangeDivider = Codes.MIN_PALETTE_CHANGE_DIVIDER; }
                 else { this._paletteChangeDivider = value; }
             }
         }

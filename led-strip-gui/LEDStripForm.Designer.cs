@@ -1,6 +1,6 @@
 ﻿namespace LedStripGui
 {
-    partial class Form1
+    partial class LEDStripForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LEDStripForm));
             this.textBox_brightness = new System.Windows.Forms.TextBox();
             this.button_brightness = new System.Windows.Forms.Button();
             this.buttonOpenSerial = new System.Windows.Forms.Button();

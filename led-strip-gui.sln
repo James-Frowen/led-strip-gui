@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "interactive-audio-console",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "interactive-audio", "interactive-audio\interactive-audio.csproj", "{A2D34846-68C6-463F-A481-D8FEF3CBFF6D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "led-strip-simulation", "led-strip-simulation\led-strip-simulation.csproj", "{B8D0867C-F437-4877-B955-5CABEB36CA5A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "led-strip", "led-strip\led-strip.csproj", "{91B48A0B-EAAE-4345-B9D2-043294613225}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{A2D34846-68C6-463F-A481-D8FEF3CBFF6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A2D34846-68C6-463F-A481-D8FEF3CBFF6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A2D34846-68C6-463F-A481-D8FEF3CBFF6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8D0867C-F437-4877-B955-5CABEB36CA5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8D0867C-F437-4877-B955-5CABEB36CA5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8D0867C-F437-4877-B955-5CABEB36CA5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8D0867C-F437-4877-B955-5CABEB36CA5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91B48A0B-EAAE-4345-B9D2-043294613225}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91B48A0B-EAAE-4345-B9D2-043294613225}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91B48A0B-EAAE-4345-B9D2-043294613225}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91B48A0B-EAAE-4345-B9D2-043294613225}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
