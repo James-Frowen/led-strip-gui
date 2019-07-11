@@ -61,6 +61,9 @@
 #define S_MODE_PeriodicPalette 2
 #define S_MODE_Controlled 3
 #define S_MODE_LineFlash 4
+// idea of modes that should be moved to Arduino
+//#define S_MODE_RandomFull 5
+//#define S_MODE_HueCycle 6
 
 #define S_PALETTE_RainbowColors 0
 #define S_PALETTE_RainbowStripeColors_NoBlend 1
