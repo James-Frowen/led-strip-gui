@@ -87,6 +87,18 @@ namespace LedStrip
             g = (int)(double_g * 255.0);
             b = (int)(double_b * 255.0);
         }
+        // Convert an HLS value into an RGB value.
+        /// <summary>
+        /// </summary>
+        /// <param name="h">0 -> 360</param>
+        /// <param name="l">0 -> 1</param>
+        /// <param name="s">0 -> 1</param>
+        public static Color FromHls(double h, double l, double s)
+        {
+            int r, g, b;
+            HlsToRgb(h, l, s, out r, out g, out b);
+            return Color.FromArgb(r, g, b);
+        }
         private static double QqhToRgb(double q1, double q2, double hue)
         {
             if (hue > 360)

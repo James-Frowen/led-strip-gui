@@ -10,6 +10,8 @@ namespace LedStrip
 
         private List<byte> message = new List<byte>();
 
+        public byte[] Messages => this.message.ToArray();
+
         public MessageBuilder(Codes.MessageType messageType)
         {
             this.MessageType = messageType;
@@ -51,6 +53,18 @@ namespace LedStrip
             Array.Copy(this.message.ToArray(), 0, bytes, 2, length - 1);
 
             return bytes;
+        }
+
+        /// <summary>
+        /// Copys the current message, and adds in reverse 
+        /// </summary>
+        public void DuplicateInReverse()
+        {
+            var length = this.message.Count;
+            for (int i = length - 1; i >= 0; i--)
+            {
+                this.message.Add(this.message[i]);
+            }
         }
     }
 }

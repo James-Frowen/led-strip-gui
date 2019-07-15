@@ -61,9 +61,9 @@ namespace LedStrip
             bool opened = true;
             try
             {
-                this.port.Open();
                 this.port.DataReceived += this.dataReceived;
                 this.port.ErrorReceived += port_ErrorReceived;
+                this.port.Open();
             }
             catch (Exception e)
             {

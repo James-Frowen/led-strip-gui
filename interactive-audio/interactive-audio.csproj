@@ -48,12 +48,12 @@
   <ItemGroup>
     <Compile Include="AudioDebuging.cs" />
     <Compile Include="AudioDrawing.cs" />
+    <Compile Include="AudioLeds.cs" />
     <Compile Include="BaseRenderer.cs" />
     <Compile Include="DrawMode.cs" />
     <Compile Include="FftEventArgs.cs" />
     <Compile Include="FFTRenderer.cs" />
     <Compile Include="FloatExtensions.cs" />
-    <Compile Include="FormRenderer.cs" />
     <Compile Include="IAudioRenderer.cs" />
     <Compile Include="ImageForm.cs">
       <SubType>Form</SubType>
@@ -69,6 +69,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\led-strip-simulation\led-strip-simulation.csproj">
+      <Project>{B8D0867C-F437-4877-B955-5CABEB36CA5A}</Project>
+      <Name>led-strip-simulation</Name>
+    </ProjectReference>
     <ProjectReference Include="..\led-strip\led-strip.csproj">
       <Project>{91B48A0B-EAAE-4345-B9D2-043294613225}</Project>
       <Name>led-strip</Name>

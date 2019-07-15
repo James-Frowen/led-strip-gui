@@ -15,6 +15,14 @@ namespace interactive_audio
             this.increaseInstanty = increaseInstanty;
         }
 
+        public float[] GetBuffer()
+        {
+            return this.buffer.ToArray();
+        }
+        public void AddToBuffer(float[] newValues)
+        {
+            this.ApplyBuffer(newValues);
+        }
         public float[] ApplyBuffer(float[] newValues)
         {
             for (int i = 0; i < this.buffer.Length; i++)

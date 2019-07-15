@@ -7,8 +7,8 @@ namespace interactive_audio_console
 {
     internal class Program
     {
-        private const int WIDTH = 360 * 2;
-        private const int HEIGHT = 100 * 2;
+        private const int WIDTH = 720;
+        private const int HEIGHT = 200;
 
         public static ImageForm Form;
         private static void Main(string[] args)
@@ -23,20 +23,6 @@ namespace interactive_audio_console
                     Width = WIDTH,
                     Height = HEIGHT
                 };
-                //Form.Paint += (s, e) =>
-                //{
-                //    using (var gfx = Form.GetGraphics())
-                //    {
-                //        using (var brush = new SolidBrush(Color.Red))
-                //        {
-                //            gfx.FillRectangle(brush, 0, 0, 400, 100);
-                //        }
-                //        using (var brush = new SolidBrush(Color.Blue))
-                //        {
-                //            gfx.FillRectangle(brush, 10, 10, 380, 80);
-                //        }
-                //    }
-                //};
                 Form.ShowDialog();
             }).Start();
 

@@ -33,6 +33,7 @@
             CONTROL_HUE = 'X',
             CONTROL_RGB = 'Y',
             CONTROL_HVS = 'Z',
+            CONTROL_AUDIOBANDS = 'W',
         }
 
         public enum Mode

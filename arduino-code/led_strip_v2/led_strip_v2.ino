@@ -55,6 +55,7 @@
 #define S_CONTROL 88                 //X
 #define S_CONTROL_RGB 89             //Y
 #define S_CONTROL_HVS 90             //Z
+#define S_CONTROL_AUDIOBANDS 87      //Z
 
 #define S_MODE_Manual 0
 #define S_MODE_Palette 1
@@ -278,6 +279,10 @@ void checkSerial(byte *msg, int length)
         DEBUG_PRINTLN("S_CONTROL_HVS");
         updateFromControlHVS(msg, length);
         break;
+    case S_CONTROL_AUDIOBANDS:
+        DEBUG_PRINTLN("S_CONTROL_AUDIOBANDS");
+        updateFromControlAudioBands(msg, length);
+        break;
     }
 }
 
@@ -471,7 +476,7 @@ void updateFromControlRGB(byte *msg, int length)
 }
 void updateFromControlHVS(byte *msg, int length)
 {
-    DEBUG_PRINTLN("updateFromControlRGB Not Implemented");
+    DEBUG_PRINTLN("updateFromControlHVS Not Implemented");
     return;
     uint8_t bytes[NUM_LEDS * 3];
 
@@ -487,6 +492,89 @@ void updateFromControlHVS(byte *msg, int length)
     }
 
     FastLED.show();
+}
+void updateFromControlAudioBands(byte *msg, int length)
+{
+    for (int i = 0; i < 10; i++)
+    {
+        uint8_t v = msg[i + 1];
+        uint8_t s = 255;
+
+        uint8_t v1 = getV1(v);
+        uint8_t v2 = getV2(v);
+        uint8_t v3 = getV3(v);
+
+        uint8_t h1 = getH(v1);
+        uint8_t h2 = getH(v2);
+        uint8_t h3 = getH(v3);
+
+        // uint8_t v1 = 128;
+        // uint8_t v2 = 192;
+        // uint8_t v3 = 255;
+
+        leds[i * 6 + 0] = CHSV(h3, s, v3);
+        leds[i * 6 + 1] = CHSV(h2, s, v2);
+        leds[i * 6 + 2] = CHSV(h1, s, v1);
+
+        leds[i * 6 + 3] = CHSV(h1, s, v1);
+        leds[i * 6 + 4] = CHSV(h2, s, v2);
+        leds[i * 6 + 5] = CHSV(h3, s, v3);
+
+#if NUM_LEDS == 120
+        leds[119 - i * 6 - 0] = CHSV(h3, s, v3);
+        leds[119 - i * 6 - 1] = CHSV(h2, s, v2);
+        leds[119 - i * 6 - 2] = CHSV(h1, s, v1);
+
+        leds[119 - i * 6 - 3] = CHSV(h1, s, v1);
+        leds[119 - i * 6 - 4] = CHSV(h2, s, v2);
+        leds[119 - i * 6 - 5] = CHSV(h3, s, v3);
+#endif
+
+        DEBUG_PRINTLN(v1);
+    }
+    FastLED.show();
+    DEBUG_PRINTLN("Finish Audio Bands");
+}
+uint8_t getV1(uint8_t v)
+{
+    if (v > 128)
+    {
+        return 255;
+    }
+    else
+    {
+        return v * 2;
+    }
+}
+uint8_t getV2(uint8_t v)
+{
+    if (v > 192)
+    {
+        return 255;
+    }
+    else if (v < 64)
+    {
+        return 0;
+    }
+    else
+    {
+        return (v - 64) * 2;
+    }
+}
+uint8_t getV3(uint8_t v)
+{
+    if (v < 128)
+    {
+        return 0;
+    }
+    else
+    {
+        return (v - 128) * 2;
+    }
+}
+uint8_t getH(uint8_t v)
+{
+    return v / 3;
 }
 
 void paletteLoop()

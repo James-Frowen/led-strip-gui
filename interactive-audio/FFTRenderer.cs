@@ -13,6 +13,7 @@ namespace interactive_audio
         private readonly Pen pen;
         private readonly SampleAggregator sampleAggregator;
         private RunningAverage runningAverage;
+        private readonly AudioLeds audioLeds;
         private SmoothBuffer lineBuffer;
         private SmoothBuffer bandBuffer;
 
@@ -30,6 +31,8 @@ namespace interactive_audio
             };
             this.sampleAggregator.FftCalculated += this.fftCalculated;
             this.runningAverage = new RunningAverage(this.runningAverageCount);
+
+            this.audioLeds = new AudioLeds();
         }
 
         public override void OnData(WaveInEventArgs a)
@@ -58,13 +61,17 @@ namespace interactive_audio
             var bufferedAverage = this.lineBuffer.ApplyBuffer(averages);
             var bufferedBands = this.bandBuffer.ApplyBuffer(bands);
 
+            this.audioLeds.Show(bands);
 
-            float scale = this.getScale(averages);
-            Console.WriteLine(scale);
-            this.GFX.Clear(Color.FromArgb(20, Color.Black));
-            this.drawBands(bufferedBands, scale);
-            this.draw(bufferedAverage, DrawMode.Line, scale);
-            this.finishDraw();
+            var showGraphics = false;
+            if (showGraphics)
+            {
+                float scale = this.getScale(averages);
+                this.GFX.Clear(Color.FromArgb(20, Color.Black));
+                this.drawBands(bufferedBands, scale);
+                this.draw(bufferedAverage, DrawMode.Line, scale);
+                this.finishDraw();
+            }
         }
 
 
